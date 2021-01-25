@@ -1,0 +1,33 @@
+{
+  "prefix": "",
+  "token": "",
+
+  
+  
+  "sunucuID" : "",
+  
+  "kayıtLOG": "",
+  "isimLOG": "",
+  
+   "vipROL": "",
+  
+  "tag" : "",
+  "tagLOG" : "",
+  "tagROL" : "",
+  
+  "kayıtsızROL": "",
+  "kayıtlıROL": "",
+  "botROL": "",
+  
+
+  "kadınROL": "",
+  "erkekROL": "",
+  
+  "jailLOG" : "",
+  "jailROL": "",
+
+
+  "yetkiliROL": "",
+  "giriskanal": ""
+
+}
