@@ -10,7 +10,7 @@ const app = express();
 let prefix = ayarlar.prefix
 
 const http = require("http");
-app.get("/", (request, response) => {//splashen
+app.get("/", (request, response) => {
   response.sendStatus(200);
 });
 app.listen(process.env.PORT);
@@ -25,7 +25,7 @@ const log = message => {
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-fs.readdir("./komutlar/", (err, files) => {//splashen
+fs.readdir("./komutlar/", (err, files) => {
   if (err) console.error(err);
   log(`${files.length} komut yüklenecek.`);
   files.forEach(f => {
@@ -39,7 +39,7 @@ fs.readdir("./komutlar/", (err, files) => {//splashen
 });
 
 client.reload = command => {
-  return new Promise((resolve, reject) => {//splashen
+  return new Promise((resolve, reject) => {
     try {
       delete require.cache[require.resolve(`./komutlar/${command}`)];
       let cmd = require(`./komutlar/${command}`);
@@ -59,7 +59,7 @@ client.reload = command => {
 };
 
 client.load = command => {
-  return new Promise((resolve, reject) => {//splashen
+  return new Promise((resolve, reject) => {
     try {
       let cmd = require(`./komutlar/${command}`);
       client.commands.set(command, cmd);
@@ -74,7 +74,7 @@ client.load = command => {
 };
 
 client.unload = command => {
-  return new Promise((resolve, reject) => {//splashen
+  return new Promise((resolve, reject) => {
     try {
       delete require.cache[require.resolve(`./komutlar/${command}`)];
       let cmd = require(`./komutlar/${command}`);
@@ -89,9 +89,9 @@ client.unload = command => {
   });
 };
 
-////////////////////////
+////////////////////////////// DURUM //////////////////////////////
 
-client.elevation = message => {//splashen
+client.elevation = message => {
   if (!message.guild) {
     return;
   }
@@ -103,91 +103,19 @@ client.elevation = message => {//splashen
 client.login(ayarlar.token);
 
 
-client.on("ready", () => {//splashen
+client.on("ready", () => {
   client.user.setPresence({
-    game: { name: `SPLASHEN PUBLİC BOT ALTYAPI`, type: "WATCHING" },
-    status: "online"
+    game: { name: `Neddanis Family 😍`, type: "WATCHING" },
+    status: "dnd"
   });
 });
 
+////////////////////////////// DURUM //////////////////////////////
+
+////////////////////////////// EDİTLE //////////////////////////////
 
 
-// İSİM YAŞ İSİM DEĞİŞTİRME 
-
-client.on("guildMemberAdd", member => {
-  let tag = ayarlar.tag;
-  //splashen
-  member.setNickname(`${tag} İsim • Yaş`);
-});
-
-// İSİM YAŞ İSİM DEĞİŞTİRME SON
-
-
-
-
-
-
-//BOT ROLÜ
-
-client.on(`guildMemberAdd`, async member => {//splashen
-  let botrol = ayarlar.botROL;
-if(!member.bot) return;
-member.addRole(botrol)
-})
-
-// BOT ROLÜ SON
-
-
-
-
-// kayıtsız rolü
-
-client.on(`guildMemberAdd`, async member => {
-  let kayıtsızROL = ayarlar.kayıtsızROL;
-if(member.bot) return;
-member.addRole(kayıtsızROL)
-})
-
-/// kayıtsız rolü son
-//splashen
-
-
-// TAG LOG
-client.on("userUpdate", async (oldUser, newUser) => {//splashen
-  if (oldUser.username !== newUser.username) {
-    let tag = ayarlar.tag
-  
-    let rol = ayarlar.tagROL;
-    
-    
-    let embed1 = new Discord.RichEmbed()
-    .setDescription(`${newUser} ${tag} tagını aldığı için <@&${rol}> rolünü kazandı!`)
-    .setImage('https://cdn.discordapp.com/attachments/620989964104237077/766391664163029012/RDF_Barrinha-1-2-1-1-1-1-1-1.gif')
-    
-    let embed2 = new Discord.RichEmbed()
-    .setDescription(`${newUser} ${tag} tagını çıkardığı için <@&${rol}> rolünü kaybetti!`)
-    .setImage('https://cdn.discordapp.com/attachments/620989964104237077/766391664163029012/RDF_Barrinha-1-2-1-1-1-1-1-1.gif')
-    
-    if (newUser.username.includes(tag) && !client.guilds.get(ayarlar.sunucuID).members.get(newUser.id).roles.has(rol)) {
-      client.channels.get(ayarlar.tagLOG).send(embed1)
-      client.guilds.get(ayarlar.sunucuID).members.get(newUser.id).addRole(rol)
-    } if (!newUser.username.includes(tag) && client.guilds.get(ayarlar.sunucuID).members.get(newUser.id).roles.has(rol)) {
-      client.guilds.get(ayarlar.sunucuID).members.get(newUser.id).removeRole(rol)
-      client.channels.get(ayarlar.tagLOG).send(embed2)
-    }
-
-  }
-})
-// TAG LOG SON
-//splashen
-
-// BOT OTOROL
-
-client.on('guildMemberAdd', async member => {//splashen
-if(member.user.bot)
-member.setRoles(['766634491502395392'])
-})
-// GİRİŞ 
+////////////////////////////// GİRİŞ SON //////////////////////////////
   client.on("guildMemberAdd", member => { 
     const moment = require('moment');
   const kanal = ayarlar.giriskanal;
@@ -196,35 +124,36 @@ member.setRoles(['766634491502395392'])
     const tarih = new Date().getTime() - user.createdAt.getTime();  
   const embed = new Discord.RichEmbed()
   let rol = ayarlar.kayıtsızROL
- member.addRole(rol)//splashen
+ member.addRole(rol)
 
   var kontrol;
-if (tarih < 1296000000) kontrol = '<a:no1:756946138342621295> __**Bu Kullanıcı Şüpheli**__'
-if (tarih > 1296000000) kontrol = '<a:tik3:756946140825649214> __**Bu Kullanıcı Güvenli**__'
+if (tarih < 1296000000) kontrol = ' **Şüpheli** <a:red:772069328899801088>'
+if (tarih > 1296000000) kontrol = ' **Güvenli** <a:onay:772069318560579604>'
+
   moment.locale("tr");
-  let kanal1 = client.channels.get(kanal);
+  var gifler = [
+  `https://data.whicdn.com/images/329944728/original.gif`,
+  `https://i.pinimg.com/originals/52/e3/6e/52e36e1ae7ae5e3dc922bd9b6fe99a20.gif`,
+  `https://3.bp.blogspot.com/-82ar8lnEqaU/VMvRZUXlf4I/AAAAAAAC36U/QomzOqgmiac/s1600/capfling.gif`,
+  `https://pa1.narvii.com/7379/aead813e3826ca0627f1e2092ce6d002ca85096fr1-480-200_hq.gif`,
+  `https://i.pinimg.com/originals/2f/c3/14/2fc3144963793534480ecd54e0548307.gif`
+  ]
+    var gif = gifler[Math.floor(Math.random() * (gifler.length))]
+    let kanal1 = client.channels.get(kanal);
     let giris = new Discord.RichEmbed()
-   .setTitle(`<a:kraltac:740610303628279808> | \`Sunucuya Bir Üye Katıldı!\` | <a:kraltac:740610303628279808>`)
+   .setColor('0x36393E')
+    .setTitle(`<a:kalp_1:772089280536772618> Sunucuya Yeni Bir **Kullanıcı** Katıldı! <a:kalp_1:772089280536772618>`)
     .setDescription(`
-• ** __Hoşgeldin! ${member}__ **
-
-•  <a:pembeh:751553654561046619> **__Seninle Birlikte ${member.guild.memberCount} Kişiyiz.__ **
-
-• \`{ ${ayarlar.tag} }\`** __Tagımızı alarak ekibimize katılabilirsin.__ **
-
-• <a:alarm1:756946152938799225> ** <@&${ayarlar.yetkiliROL}> __seninle ilgilenicektir.__ **
-
-• <a:sari3:751558669585612830> ** __Hesabın Oluşturulma Tarihi:__** \n • \` ${moment(member.user.createdAt).format("YYYY DD MMMM dddd (hh:mm:ss)")} \`
-
-•  ${kontrol} 
-
-• <a:duyur:766652129678721074> ** __ Ses teyit odasında kaydınızı yaptırabilirsiniz. __ ** 
-
-`)//splashen
-    .setThumbnail(member.user.avatarURL || 'https://cdn.discordapp.com/attachments/766342468576608318/766343451994226778/af8039261a387be71514bb4c2e5e54b5.gif')
-    .setImage('https://cdn.discordapp.com/attachments/766342468576608318/766343451994226778/af8039261a387be71514bb4c2e5e54b5.gif')
-    .setTimestamp()
+<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** Hoşgeldin **[ ${member} ](https://discord.gg/dclink)** \n<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** **[Teyit](https://discord.gg/dclink)** Odasına Geçerek **[Kayıt](https://discord.gg/dclink)** Olabilirsin! \n
+<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** Hesabın Oluşturulma **[Tarihi](https://discord.gg/dclink)**; \n<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** \ ${moment(member.user.createdAt).format("YYYY DD MMMM dddd (hh:mm:ss)")} \n 
+<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** Seninle Birlikte **[ ${member.guild.memberCount} ](https://discord.gg/dclink)** Kişiyiz! \n
+<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** Tagımızı Alarak **[Ekibimize](https://discord.gg/dclink)** Katılabilirsin! **[ ${ayarlar.tag} ](https://discord.gg/dclink)** \n
+<a:hey:772069244190851122> **[»](https://discord.gg/dclink)**  **[ <@&${ayarlar.yetkiliROL}> ](https://discord.gg/dclink)** Rolüne Sahip **[Yetkililer](https://discord.gg/dclink)** Sizinle İlgilenecektir!
+<a:hey:772069244190851122> **[»](https://discord.gg/dclink)** Hesap: **${kontrol}**
+`)
+    .setImage(`${gif}`)
+    
 kanal1.send(giris)
   });
-// GİRİŞ SON
-//splashen
+
+////////////////////////////// GİRİŞ SON //////////////////////////////
